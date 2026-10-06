@@ -1,0 +1,21 @@
+gantt
+title SignFlow documentation and pilot plan
+ dateFormat  YYYY-MM-DD
+ axisFormat  %d %b
+ excludes    weekends
+ section Initiation
+ Scope and governance                 :milestone, m1, 2026-10-05, 0d
+ Initiation and stakeholder setup     :a1, 2026-10-05, 2d
+ section Requirements and design
+ Requirements and SRS baseline         :a2, after a1, 5d
+ Design, UML, and routing rules        :a3, after a2, 5d
+ Legal/signature review                :a4, after a2, 4d
+ section Configuration and verification
+ Data and rule preparation             :a5, after a3, 3d
+ Configuration and build               :a6, after a3, 9d
+ Integration and system testing        :a7, after a6, 4d
+ section Adoption and pilot
+ UAT and assisted training             :a8, after a7, 4d
+ Pilot and closure                     :a9, after a8, 3d
+ UAT decision                          :milestone, m2, after a8, 0d
+ Pilot release / closure decision      :milestone, m3, after a9, 0d

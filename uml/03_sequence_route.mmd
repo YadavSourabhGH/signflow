@@ -1,0 +1,21 @@
+sequenceDiagram
+  actor Staff as Administration staff
+  participant UI as SignFlow UI
+  participant FileSvc as File service
+  participant Router as Routing service
+  participant Rules as Routing rules
+  participant Audit as Audit service
+  participant Notify as Notification service
+
+  Staff->>UI: Submit file(fileType, amount, attachments)
+  UI->>FileSvc: validate and create file
+  FileSvc->>Rules: check(fileType, amount)
+  Rules-->>FileSvc: route roles and approval levels
+  FileSvc->>Router: create route(file, roles)
+  Router-->>FileSvc: ApprovalRoute with steps
+  FileSvc->>Audit: record Submitted and Routed events
+  Audit-->>FileSvc: event IDs
+  FileSvc->>Notify: notify first approver
+  Notify-->>FileSvc: notification result
+  FileSvc-->>UI: file ID, current owner, due date
+  UI-->>Staff: show routed status

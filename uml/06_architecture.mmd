@@ -1,0 +1,14 @@
+flowchart LR
+  User[University users] --> Web[SignFlow browser UI]
+  Web --> Identity[University identity source]
+  Web --> FileService[File and workflow service]
+  FileService --> Rules[Routing rules]
+  FileService --> Audit[Append-only audit service]
+  FileService --> Notify[Reminder and escalation service]
+  FileService --> Signature[Digital signature adapter]
+  FileService --> Store[(File metadata and attachment store)]
+  Notify --> Message[University notification service]
+  Signature --> Provider[Approved signature provider]
+  Web --> Reports[Reporting view]
+  Reports --> Store
+  Reports --> Audit

@@ -1,0 +1,40 @@
+flowchart LR
+  Staff([Administration staff])
+  Officer([Section officer])
+  Senior([Senior officer])
+  Registrar([Registrar])
+  Legal([Legal/compliance representative])
+  IdP[[University identity source]]
+  Sig[[Digital signature service]]
+  Notify[[Notification service]]
+
+  subgraph SignFlow
+    UC1((Create and submit file))
+    UC2((Route file))
+    UC3((Review file))
+    UC4((Approve / reject / return))
+    UC5((Sign approval))
+    UC6((Track status and audit))
+    UC7((Receive reminder / escalation))
+    UC8((Run reports))
+    UC9((Approve signature method))
+  end
+
+  Staff --> UC1
+  Staff --> UC6
+  Officer --> UC3
+  Officer --> UC4
+  Senior --> UC3
+  Senior --> UC4
+  Senior --> UC5
+  Registrar --> UC8
+  Registrar --> UC6
+  Legal --> UC9
+  UC1 --> UC2
+  UC2 --> UC3
+  UC4 --> UC5
+  UC5 --- Sig
+  UC1 --- IdP
+  UC3 --- IdP
+  UC7 --- Notify
+  UC9 --- Sig

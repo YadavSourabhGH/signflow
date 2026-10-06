@@ -1,0 +1,30 @@
+flowchart TD
+  A([Start]) --> B[Create draft]
+  B --> C{Mandatory data valid?}
+  C -- No --> D[Show errors]
+  D --> B
+  C -- Yes --> E[Submit file]
+  E --> F[Apply file-type and amount rules]
+  F --> G[Create approval route]
+  G --> H[Record audit event]
+  H --> I[Notify current approver]
+  I --> J{Decision received?}
+  J -- No --> K{Due date passed?}
+  K -- No --> J
+  K -- Yes --> L[Send reminder / escalation]
+  L --> J
+  J -- Return --> M[Return to requester]
+  M --> B
+  J -- Reject --> N[Record rejection]
+  J -- Approve, signature required --> O[Request digital signature]
+  O --> P{Signature valid?}
+  P -- No --> Q[Raise exception]
+  Q --> J
+  P -- Yes --> R[Record approval]
+  J -- Approve, no signature --> R
+  R --> S{More approval steps?}
+  S -- Yes --> I
+  S -- No --> T[Mark approved]
+  T --> U[Notify requester]
+  U --> V([End])
+  N --> V

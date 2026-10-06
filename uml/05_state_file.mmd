@@ -1,0 +1,15 @@
+stateDiagram-v2
+  [*] --> Draft
+  Draft --> Submitted: submit()
+  Submitted --> InReview: route created
+  InReview --> AwaitingSignature: approval accepted and signing required
+  AwaitingSignature --> InReview: signature invalid / exception
+  AwaitingSignature --> Approved: signature validated
+  InReview --> Approved: final approval without signature
+  InReview --> Returned: return(reason)
+  Returned --> Draft: requester edits
+  InReview --> Rejected: reject(reason)
+  Submitted --> Cancelled: cancel()
+  Approved --> Archived: retention action
+  Rejected --> Archived: retention action
+  Cancelled --> Archived: retention action
